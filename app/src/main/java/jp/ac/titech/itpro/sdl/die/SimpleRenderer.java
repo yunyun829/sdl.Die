@@ -16,14 +16,14 @@ public class SimpleRenderer implements GLSurfaceView.Renderer {
 
     SimpleRenderer() {}
 
-    void setObj(Obj obj, float x, float y, float z) {
+    public void setObj(Obj obj, float x, float y, float z) {
         this.obj = obj;
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
-    void setObj(Obj obj) {
+    public void setObj(Obj obj) {
         setObj(obj, 0, 0, 0);
     }
 

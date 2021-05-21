@@ -1,5 +1,6 @@
 package jp.ac.titech.itpro.sdl.die;
 
+import android.annotation.SuppressLint;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
         public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected");
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
