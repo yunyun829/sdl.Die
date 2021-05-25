@@ -10,14 +10,23 @@ import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener{
     private final static String TAG = MainActivity.class.getSimpleName();
 
     private GLSurfaceView glView;
     private SimpleRenderer renderer;
 
+    private Timer timer = new Timer();
+
     private Cube cube;
     private Pyramid pyramid;
+
+    private SeekBar seekBarX;
+    private SeekBar seekBarY;
+    private SeekBar seekBarZ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +35,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         setContentView(R.layout.activity_main);
 
         glView = findViewById(R.id.gl_view);
-        SeekBar seekBarX = findViewById(R.id.seekbar_x);
-        SeekBar seekBarY = findViewById(R.id.seekbar_y);
-        SeekBar seekBarZ = findViewById(R.id.seekbar_z);
+        seekBarX = findViewById(R.id.seekbar_x);
+        seekBarY = findViewById(R.id.seekbar_y);
+        seekBarZ = findViewById(R.id.seekbar_z);
         seekBarX.setMax(360);
         seekBarY.setMax(360);
         seekBarZ.setMax(360);
@@ -48,6 +57,16 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         super.onResume();
         Log.d(TAG, "onResume");
         glView.onResume();
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                seekBarX.setProgress((seekBarX.getProgress()+1)%360);
+                seekBarY.setProgress((seekBarY.getProgress()+2)%360);
+                seekBarZ.setProgress((seekBarZ.getProgress()+4)%360);
+            }
+        },0,40);
     }
 
     @Override
@@ -102,4 +121,5 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
+
 }
